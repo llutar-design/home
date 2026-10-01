@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>부여마을탐험대 활동지</title>
+<style>
+  @page { size: A4 portrait; margin: 10mm; }
+  :root { --ink: #3e2723; --line: #8d6e63; --soft: #fff8e7; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #fff; color: var(--ink); font-family: "Malgun Gothic", "맑은 고딕", "Noto Sans KR", sans-serif; font-size: 14pt; line-height: 1.45; }
+  .page { width: 190mm; margin: 0 auto; padding: 4mm 0; }
+  header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 3px solid var(--ink); padding-bottom: 2mm; margin-bottom: 3mm; }
+  h1 { font-size: 22pt; margin: 0; }
+  .who { font-size: 12pt; }
+  .who span { display: inline-block; min-width: 38mm; border-bottom: 1.5px solid var(--ink); }
+  .note { font-size: 9.5pt; color: #6d4c41; margin: 0 0 3mm; }
+  section { border: 2px solid var(--line); border-radius: 4mm; padding: 2.5mm 4mm; margin-bottom: 3mm; break-inside: avoid; }
+  h2 { font-size: 13.5pt; margin: 0 0 1.5mm; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3mm; }
+  .box { border: 1.5px dashed var(--line); border-radius: 2mm; height: 26mm; padding: 1.5mm; font-size: 10pt; color: #8d6e63; }
+  .lines div { border-bottom: 1.5px solid #bcaaa4; height: 9mm; }
+  table { width: 100%; border-collapse: collapse; font-size: 12pt; }
+  td { border: 1.5px solid #bcaaa4; padding: 1.5mm 2mm; height: 10mm; }
+  td.l { width: 38%; background: var(--soft); }
+  .frame { margin: 1mm 0; }
+  .blank { display: inline-block; min-width: 40mm; border-bottom: 1.5px solid var(--ink); }
+  .faces { display: flex; gap: 6mm; font-size: 12pt; }
+  .faces label { display: inline-flex; gap: 1.5mm; align-items: center; }
+  .sq { display: inline-block; width: 5mm; height: 5mm; border: 1.5px solid var(--ink); }
+  footer { font-size: 9pt; color: #6d4c41; text-align: center; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <h1>부여마을탐험대 활동지</h1>
+    <div class="who">탐험대 이름 <span></span></div>
+  </header>
+  <p class="note">교과서 확인 전 임시 교육 구성 · 게임 속 지도는 규암면을 참고하여 재구성한 학습용 지도예요.</p>
+
+  <section>
+    <h2>1. 내가 가 본 곳 (그림이나 낱말로)</h2>
+    <div class="grid3">
+      <div class="box">장소 이름:</div>
+      <div class="box">장소 이름:</div>
+      <div class="box">장소 이름:</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>2. 만난 사람과 하는 일</h2>
+    <table>
+      <tr><td class="l">만난 사람</td><td>하는 일 / 필요한 도구</td></tr>
+      <tr><td class="l"></td><td></td></tr>
+      <tr><td class="l"></td><td></td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>3. 내가 알아본 특산품</h2>
+    <div class="frame">특산품 이름: <span class="blank"></span> &nbsp; 특징: <span class="blank" style="min-width:80mm"></span></div>
+  </section>
+
+  <section>
+    <h2>4. 축제를 위해 내가 한 일 · 함께 쓰는 곳의 약속</h2>
+    <div class="lines"><div></div><div></div></div>
+  </section>
+
+  <section>
+    <h2>5. 우리 마을 소개하기 (빈칸을 채워요)</h2>
+    <div class="frame">나는 <span class="blank"></span>에 가 보았어요.</div>
+    <div class="frame">이곳에서는 <span class="blank"></span>을/를 할 수 있어요.</div>
+    <div class="frame">내가 알아본 특산품은 <span class="blank"></span>이에요/예요.</div>
+    <div class="frame">나는 축제에서 <span class="blank"></span>을/를 도왔어요.</div>
+  </section>
+
+  <section>
+    <h2>6. 새롭게 알게 된 점</h2>
+    <div class="lines"><div></div></div>
+    <div class="faces" style="margin-top:2mm">
+      <span>짝 활동 역할:</span>
+      <label><span class="sq"></span>조작했어요</label>
+      <label><span class="sq"></span>관찰하고 이야기했어요</label>
+      <label><span class="sq"></span>둘 다 해 봤어요</label>
+    </div>
+  </section>
+  <footer>정답을 맞히는 활동지가 아니에요. 내가 보고, 묻고, 알게 된 것을 적어요.</footer>
+</div>
+</body>
+</html>
