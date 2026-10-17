@@ -92,7 +92,7 @@ body {
 		</style>
 		<link id="-gd-engine-icon" rel="icon" type="image/png" href="index.icon.png" />
 <link rel="apple-touch-icon" href="index.apple-touch-icon.png"/>
-<meta name="description" content="초등 2학년 마을 학습용 규암면 탐험 게임">
+<meta name="description" content="초등학생 마을 학습용 규암면 탐험 게임">
 	</head>
 	<body>
 		<canvas id="canvas">
@@ -105,23 +105,33 @@ body {
 
 		<div id="status">
 			<img id="status-splash" class="show-image--false fullsize--true use-filter--true" src="index.png" alt="">
-			<progress id="status-progress"></progress>
+			<progress id="status-progress"></progress><div id="load-hint" style="position:absolute;left:0;right:0;top:calc(50% + 24px);text-align:center;color:#fff;font:16px/1.6 sans-serif;text-shadow:0 1px 3px #000">부여마을탐험대를 불러오고 있어요.<br>처음 한 번은 조금 오래 걸려요. 다음부터는 더 빨라요.</div>
 			<div id="status-notice"></div>
 		</div>
 
 		<script>
-/* index.wasm 요청을 index.wasm.gz 로 바꿔 받고 브라우저 안에서 압축을 푼다(GitHub 업로드 용량 제한 때문). */
+/* index.wasm 요청을 index.wasm.gz 로 바꿔 받고 브라우저 안에서 압축을 푼다(GitHub 업로드 용량 제한 때문).
+   받는 대로 바로 풀어 넘기므로 내려받기·풀기·준비가 동시에 진행되고 진행 막대도 움직인다. */
 (function () {
 	var origFetch = window.fetch.bind(window);
 	window.fetch = function (input, init) {
 		var url = (typeof input === 'string') ? input : ((input && input.url) || '');
 		if (/(^|\/)index\.wasm(\?|$)/.test(url)) {
 			return origFetch(url.replace(/index\.wasm/, 'index.wasm.gz'), init).then(function (r) {
-				if (!r.ok) { return r; }
-				return r.arrayBuffer().then(function (buf) {
-					var b = new Uint8Array(buf, 0, 2);
-					var stream = new Blob([buf]).stream();
-					if (b[0] === 0x1f && b[1] === 0x8b) { stream = stream.pipeThrough(new DecompressionStream('gzip')); }
+				if (!r.ok || !r.body) { return r; }
+				var reader = r.body.getReader();
+				return reader.read().then(function (first) {
+					var head = first.value || new Uint8Array(0);
+					var gz = head.length > 1 && head[0] === 0x1f && head[1] === 0x8b;
+					var stream = new ReadableStream({
+						start: function (c) { if (head.length) { c.enqueue(head); } if (first.done) { c.close(); } },
+						pull: function (c) {
+							return reader.read().then(function (n) { if (n.done) { c.close(); } else { c.enqueue(n.value); } });
+						},
+						cancel: function (why) { return reader.cancel(why); }
+					});
+					/* 서버가 이미 풀어서 보낸 경우(gzip 머리가 없음)에는 그대로 쓴다. */
+					if (gz) { stream = stream.pipeThrough(new DecompressionStream('gzip')); }
 					return new Response(stream, { status: 200, headers: { 'Content-Type': 'application/wasm' } });
 				});
 			});
@@ -131,7 +141,7 @@ body {
 })();
 </script><script src="index.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":1369612,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":1428780,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 
